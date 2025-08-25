@@ -1,10 +1,10 @@
 # 🚗 Road Accident Severity Prediction System
 
-A machine learning-powered web application that predicts road accident severity based on various factors like location, time, weather conditions, and road characteristics.
+A machine learning-powered application that predicts road accident severity based on various factors like location, time, weather conditions, and road characteristics. Features both a Streamlit web app and a PowerPoint presentation generator.
 
 ## 🎯 **Project Overview**
 
-This application uses a **simplified 10-feature model** to predict accident severity with high accuracy. It provides a beautiful, modern web interface for real-time predictions.
+This application uses a **simplified 10-feature model** to predict accident severity with high accuracy. It provides an interactive Streamlit interface for real-time predictions and can generate professional PowerPoint presentations for project demonstrations.
 
 ## 📁 **Project Structure**
 
@@ -13,12 +13,19 @@ ML project/
 ├── data/
 │   └── road_accident_dataset.csv    # Main dataset
 ├── models/                          # Trained ML models
+│   ├── simple_decision_tree_model.pkl
+│   ├── simple_random_forest_model.pkl
+│   ├── simple_best_model.pkl
+│   ├── simple_label_encoders.pkl
+│   ├── simple_scaler.pkl
+│   └── simple_feature_info.json
 ├── src/
 │   ├── simple_data_preprocessing.py # Data preprocessing
 │   ├── simple_model_training.py     # Model training
 │   └── simple_prediction.py         # Prediction logic
-|
-├── simple_web_interface.py         # Flask web server
+├── app.py                          # Streamlit web application
+├── generate_presentation.py        # PowerPoint generator script
+├── Road_Accident_Severity_Presentation.pptx  # Generated presentation
 ├── requirements.txt                # Python dependencies
 └── README.md                      # This file
 ```
@@ -30,23 +37,24 @@ ML project/
 pip install -r requirements.txt
 ```
 
-### **Step 2: Run the Application**
+### **Step 2: Run the Streamlit App**
 ```bash
-python simple_web_interface.py
+streamlit run app.py
 ```
 
 ### **Step 3: Access the Web Interface**
 - Open your browser
-- Go to: **http://localhost:5000**
+- Go to: **http://localhost:8501**
 - Start making predictions!
 
 ## 🎨 **Features**
 
-### **Beautiful Modern Interface:**
-- ✨ Animated gradient background
-- 🎨 Glassmorphism design with blur effects
-- 📱 Fully responsive design
-- 🌟 Smooth animations and transitions
+### **Interactive Streamlit Interface:**
+- ✨ Clean, modern design with icons
+- 🎨 Grouped input sections for better UX
+- 📱 Responsive layout with columns
+- 🌟 Sample scenarios and quick reset functionality
+- 🔄 Model selector (Decision Tree vs Random Forest)
 
 ### **Input Fields (10 Essential Features):**
 1. **Country** (including 🇮🇳 India)
@@ -67,10 +75,11 @@ python simple_web_interface.py
 - 🔴 **Fatal** - Very high risk accident
 
 ### **Results Include:**
-- 📊 Confidence scores for each severity level
+- 📊 Confidence scores with visual bar charts
 - 💡 AI interpretation and recommendations
-- 📈 Visual progress bars
-- 🎯 Real-time analysis
+- 📈 Feature importance visualization
+- 🎯 Real-time analysis with model selection
+- 🔍 Detailed probability breakdowns
 
 ## 🔧 **Technical Details**
 
@@ -86,9 +95,10 @@ python simple_web_interface.py
 - Consistent preprocessing pipeline
 
 ### **Web Framework:**
-- **Flask** backend
-- **HTML/CSS/JavaScript** frontend
-- **RESTful API** for predictions
+- **Streamlit** frontend and backend
+- **Python-based** with pandas and plotly
+- **Interactive widgets** for user input
+- **Real-time predictions** with caching
 
 ## 📊 **Model Performance**
 
@@ -99,6 +109,13 @@ The simplified model achieves:
 - **Robust preprocessing**: Handles various input scenarios
 
 ## 🎯 **Example Usage**
+
+### **Using the Streamlit App:**
+1. Fill in the scenario details using the form
+2. Choose your preferred model (Random Forest recommended)
+3. Click "Predict Severity" to get results
+4. View confidence scores and feature importance
+5. Use sample scenarios for quick testing
 
 ### **Low Risk Scenario:**
 - Country: USA, Year: 2024, Month: June
@@ -116,6 +133,12 @@ The simplified model achieves:
 
 ## 🛠️ **Development**
 
+### **Generate PowerPoint Presentation:**
+```bash
+python generate_presentation.py
+```
+This creates `Road_Accident_Severity_Presentation.pptx` with project details.
+
 ### **Retrain Models:**
 ```bash
 python src/simple_model_training.py
@@ -126,18 +149,64 @@ python src/simple_model_training.py
 python src/simple_prediction.py
 ```
 
+### **Local Development:**
+```bash
+# Install in development mode
+pip install -e .
+
+# Run with custom port
+streamlit run app.py --server.port 8502
+```
+
 ## 📋 **Requirements**
 
 - Python 3.7+
-- Flask
+- Streamlit
 - pandas
 - numpy
 - scikit-learn
 - joblib
 - matplotlib
 - seaborn
+- python-pptx (for presentation generation)
+
+## 🚀 **Deployment**
+
+### **Streamlit Community Cloud (Recommended):**
+1. Push your code to GitHub
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Connect your repository
+4. Set main file to `app.py`
+5. Deploy!
+
+### **Alternative Platforms:**
+- **Render**: For API-based deployment
+- **Railway**: For containerized deployment
+- **PythonAnywhere**: For Python-focused hosting
+
+## 📊 **Presentation Features**
+
+The included PowerPoint generator creates professional slides covering:
+- Project overview and objectives
+- Data and feature descriptions
+- Model architecture and training
+- Feature importance analysis
+- Streamlit app demonstration
+- Future improvements and next steps
+
+Perfect for academic presentations, client demos, or project showcases!
 
 ## 🎉 **Ready to Use!**
 
-Your accident prediction system is now clean, optimized, and ready for use. Simply run `python simple_web_interface.py` and start making predictions!
+Your accident prediction system is now modern, interactive, and ready for use! Run `streamlit run app.py` to start the web app, or use `python generate_presentation.py` to create presentation materials.
+
+## 📞 **Support & Contributing**
+
+Feel free to:
+- 🐛 Report issues
+- 💡 Suggest improvements
+- 🔧 Submit pull requests
+- ⭐ Star the repository
+
+Happy predicting! 🚗✨
 
