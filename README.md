@@ -1,10 +1,10 @@
 # 🚗 Road Accident Severity Prediction System
 
-A machine learning-powered application that predicts road accident severity based on various factors like location, time, weather conditions, and road characteristics. Features both a Streamlit web app and a PowerPoint presentation generator.
+A machine learning-powered application that predicts road accident severity based on various factors like location, time, weather conditions, and road characteristics. Features an interactive Streamlit web app for real-time predictions.
 
 ## 🎯 **Project Overview**
 
-This application uses a **simplified 10-feature model** to predict accident severity with high accuracy. It provides an interactive Streamlit interface for real-time predictions and can generate professional PowerPoint presentations for project demonstrations.
+This application uses a **simplified 10-feature model** to predict accident severity with high accuracy. It provides an interactive Streamlit interface for real-time predictions.
 
 ## 📁 **Project Structure**
 
@@ -24,7 +24,7 @@ ML project/
 │   ├── simple_model_training.py     # Model training
 │   └── simple_prediction.py         # Prediction logic
 ├── app.py                          # Streamlit web application
-├── generate_presentation.py        # PowerPoint generator script
+
 ├── requirements.txt                # Python dependencies
 └── README.md                      # This file
 ```
@@ -132,11 +132,7 @@ The simplified model achieves:
 
 ## 🛠️ **Development**
 
-### **Generate PowerPoint Presentation:**
-```bash
-python generate_presentation.py
-```
-This creates `Road_Accident_Severity_Presentation.pptx` with project details.
+
 
 ### **Retrain Models:**
 ```bash
@@ -167,7 +163,7 @@ streamlit run app.py --server.port 8502
 - joblib
 - matplotlib
 - seaborn
-- python-pptx (for presentation generation)
+
 
 ## 🚀 **Deployment**
 
@@ -183,21 +179,11 @@ streamlit run app.py --server.port 8502
 - **Railway**: For containerized deployment
 - **PythonAnywhere**: For Python-focused hosting
 
-## 📊 **Presentation Features**
 
-The included PowerPoint generator creates professional slides covering:
-- Project overview and objectives
-- Data and feature descriptions
-- Model architecture and training
-- Feature importance analysis
-- Streamlit app demonstration
-- Future improvements and next steps
-
-Perfect for academic presentations, client demos, or project showcases!
 
 ## 🎉 **Ready to Use!**
 
-Your accident prediction system is now modern, interactive, and ready for use! Run `streamlit run app.py` to start the web app, or use `python generate_presentation.py` to create presentation materials.
+Your accident prediction system is now modern, interactive, and ready for use! Run `streamlit run app.py` to start the web app.
 
 ## 📞 **Support & Contributing**
 
