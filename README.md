@@ -17,8 +17,7 @@ ML project/
 │   ├── simple_data_preprocessing.py # Data preprocessing
 │   ├── simple_model_training.py     # Model training
 │   └── simple_prediction.py         # Prediction logic
-├── templates/
-│   └── simple_index.html           # Web interface
+|
 ├── simple_web_interface.py         # Flask web server
 ├── requirements.txt                # Python dependencies
 └── README.md                      # This file
