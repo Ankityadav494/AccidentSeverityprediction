@@ -1,0 +1,15 @@
+{
+  "feature_columns": [
+    "Year",
+    "Visibility Level",
+    "Number of Vehicles Involved",
+    "Country_Encoded",
+    "Month_Encoded",
+    "Day of Week_Encoded",
+    "Time of Day_Encoded",
+    "Urban/Rural_Encoded",
+    "Road Type_Encoded",
+    "Weather Conditions_Encoded"
+  ],
+  "target_column": "Accident Severity"
+}
