@@ -25,7 +25,6 @@ ML project/
 │   └── simple_prediction.py         # Prediction logic
 ├── app.py                          # Streamlit web application
 ├── generate_presentation.py        # PowerPoint generator script
-├── Road_Accident_Severity_Presentation.pptx  # Generated presentation
 ├── requirements.txt                # Python dependencies
 └── README.md                      # This file
 ```
