@@ -11,6 +11,18 @@ import json
 import os
 from simple_data_preprocessing import SimpleDataPreprocessor
 
+def _safe_print(message: str) -> None:
+    """Print without raising Unicode errors on terminals with limited encodings."""
+    try:
+        print(message)
+    except UnicodeEncodeError:
+        try:
+            print(message.encode('ascii', 'ignore').decode('ascii'))
+        except Exception:
+            # As a last resort, print a generic message
+            print("[log suppressed due to encoding]")
+
+
 class SimpleAccidentPredictor:
     def __init__(self, models_dir='models'):
         self.models_dir = models_dir
@@ -25,7 +37,7 @@ class SimpleAccidentPredictor:
     
     def _load_models(self):
         """Load trained models"""
-        print("Loading simple trained models...")
+        _safe_print("Loading simple trained models...")
         
         # Load models
         model_files = {
@@ -37,11 +49,11 @@ class SimpleAccidentPredictor:
             model_path = os.path.join(self.models_dir, filename)
             if os.path.exists(model_path):
                 self.models[name] = joblib.load(model_path)
-                print(f"Loaded {name} model")
+                _safe_print(f"Loaded {name} model")
             else:
-                print(f"⚠️  {name} model not found")
+                _safe_print(f"[warn] {name} model not found")
         
-        print("Simple models loaded successfully")
+        _safe_print("Simple models loaded successfully")
     
     def _load_preprocessing_info(self):
         """Load preprocessing information"""
@@ -50,9 +62,9 @@ class SimpleAccidentPredictor:
             with open(feature_info_path, 'r') as f:
                 feature_info = json.load(f)
                 self.feature_columns = feature_info.get('feature_columns', [])
-                print(f"Loaded simple feature info: {len(self.feature_columns)} features")
+                _safe_print(f"Loaded simple feature info: {len(self.feature_columns)} features")
         else:
-            print("⚠️  Simple feature info not found, using default features")
+            _safe_print("[warn] Simple feature info not found, using default features")
             self.feature_columns = [
                 'Year', 'Visibility Level', 'Number of Vehicles Involved',
                 'Country_Encoded', 'Month_Encoded', 'Day of Week_Encoded', 'Time of Day_Encoded',
@@ -63,18 +75,18 @@ class SimpleAccidentPredictor:
         encoders_path = os.path.join(self.models_dir, 'simple_label_encoders.pkl')
         if os.path.exists(encoders_path):
             self.label_encoders = joblib.load(encoders_path)
-            print(f"Loaded {len(self.label_encoders)} label encoders")
+            _safe_print(f"Loaded {len(self.label_encoders)} label encoders")
         else:
-            print("⚠️  Label encoders not found")
+            _safe_print("[warn] Label encoders not found")
             self.label_encoders = {}
         
         # Load scaler
         scaler_path = os.path.join(self.models_dir, 'simple_scaler.pkl')
         if os.path.exists(scaler_path):
             self.scaler = joblib.load(scaler_path)
-            print("Loaded scaler")
+            _safe_print("Loaded scaler")
         else:
-            print("⚠️  Scaler not found")
+            _safe_print("[warn] Scaler not found")
             self.scaler = None
     
     def _prepare_input_data(self, scenario):
@@ -97,7 +109,7 @@ class SimpleAccidentPredictor:
         missing_features = [col for col in self.feature_columns if col not in input_data.columns]
         
         if missing_features:
-            print(f"⚠️  Missing features: {missing_features}")
+            _safe_print(f"[warn] Missing features: {missing_features}")
             # Fill missing features with default values
             for feature in missing_features:
                 if 'Encoded' in feature:
@@ -133,7 +145,7 @@ class SimpleAccidentPredictor:
                         df[f'{col}_Encoded'] = self.label_encoders[col].transform(df[col].astype(str))
                     except ValueError as e:
                         # Handle unseen values by using a default encoding
-                        print(f"⚠️  Unseen value in {col}, using default encoding")
+                        _safe_print(f"[warn] Unseen value in {col}, using default encoding")
                         unique_values = df[col].unique()
                         encoding = {val: idx for idx, val in enumerate(unique_values)}
                         df[f'{col}_Encoded'] = df[col].map(encoding)
@@ -180,7 +192,7 @@ class SimpleAccidentPredictor:
             }
             
         except Exception as e:
-            print(f"❌ Prediction error: {e}")
+            _safe_print(f"[error] Prediction error: {e}")
             return None
     
     def get_available_models(self):
